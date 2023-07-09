@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1688903425 source:c:\users\jeroein magno\documents\c++\cinema\main.cpp
+	<iostream>
+	<fstream>
+	<sstream>
+	<unordered_map>
+	<vector>
+	<algorithm>
+	<windows.h>
+	<conio.h>
+	<unordered_set>
+	<iomanip>
+	<regex>
+
