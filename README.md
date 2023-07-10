@@ -2,15 +2,15 @@
 
 ## Movie Booking System
 
-The Movie Booking System is a command-line application implemented in C++. It allows users to book movie tickets, view movie information, and manage client data. The program provides separate consoles for administrators and users, each with different functionalities.
+The Movie Booking System is a command-line application implemented in C++. It allows users to book movie tickets, view movie information, and manage user data. The program provides separate consoles for administrators and users, each with different functionalities.
 
 This code uses the following data structures:
 
 1. `std::unordered_map<std::string, Movie> movies`: This unordered map stores movies as key-value pairs, where the movie title is the key and the associated movie information is the value. It allows fast access to movie information based on the title.
 
-2. `std::vector<Client> clients`: This vector stores client information. Each element in the vector represents a client and contains various attributes such as name, phone number, email address, movie title, available time, and cinema. The vector allows storing and accessing multiple client records.
+2. `std::vector<User> users`: This vector stores user information. Each element in the vector represents a user and contains various attributes such as name, phone number, email address, movie title, available time, and cinema. The vector allows storing and accessing multiple user records.
 
-Both data structures are used to store and manage movie and client data, respectively, throughout the program. The unordered map provides efficient lookup based on movie titles, while the vector allows storing and iterating over multiple client records.
+Both data structures are used to store and manage movie and user data, respectively, throughout the program. The unordered map provides efficient lookup based on movie titles, while the vector allows storing and iterating over multiple user records.
 
 ### Features
 
@@ -19,9 +19,9 @@ Both data structures are used to store and manage movie and client data, respect
   - Delete movies: Administrators can delete movies from the system if they are no longer available.
   - Modify movie details: Administrators can modify the details of existing movies, such as title, price, duration, and available showtimes.
   - View movie information: Administrators can view detailed information about each movie, including its title, price, duration, available showtimes, and the number of booked seats.
-  - View client information: Administrators can view information about the clients who have booked movie tickets, including their names, phone numbers, email addresses, booked seats, and available showtimes.
-  - Modify client details: Administrators can modify the details of clients, such as their names, phone numbers, email addresses, booked seats, and available showtimes.
-  - Delete client information: Administrators can delete client records from the system if necessary.
+  - View user information: Administrators can view information about the users who have booked movie tickets, including their names, phone numbers, email addresses, booked seats, and available showtimes.
+  - Modify user details: Administrators can modify the details of users, such as their names, phone numbers, email addresses, booked seats, and available showtimes.
+  - Delete user information: Administrators can delete user records from the system if necessary.
 
 - **User Console**: The User Console allows users to book movie tickets:
   - View available movies: Users can view a list of available movies, including their titles, prices, durations, and available showtimes.
@@ -33,11 +33,11 @@ Both data structures are used to store and manage movie and client data, respect
 
 The Movie Booking System code utilizes several important components:
 
-- **Structs and Classes**: The code defines two main structures, `Movie` and `Client`, to store movie and client information, respectively. The `Movie` struct includes attributes such as title, price, duration, available showtimes, and the number of booked seats. The `Client` struct stores details about the client, including their name, phone number, email address, booked seats, and available showtimes.
+- **Structs and Classes**: The code defines two main structures, `Movie` and `User`, to store movie and user information, respectively. The `Movie` struct includes attributes such as title, price, duration, available showtimes, and the number of booked seats. The `User` struct stores details about the user, including their name, phone number, email address, booked seats, and available showtimes.
 
-- **Data Storage**: The movie data is stored using a `std::unordered_map` container, where the movie title serves as the key and the corresponding `Movie` struct is the value. This data structure allows for efficient lookup based on the movie title, enabling quick retrieval of movie information. The client data is stored in a `std::vector` of `Client` structs, allowing for dynamic addition and removal of client records.
+- **Data Storage**: The movie data is stored using a `std::unordered_map` container, where the movie title serves as the key and the corresponding `Movie` struct is the value. This data structure allows for efficient lookup based on the movie title, enabling quick retrieval of movie information. The user data is stored in a `std::vector` of `User` structs, allowing for dynamic addition and removal of user records.
 
-- **File I/O**: The code implements functions for reading movie and client data from a data file (`1data.dat`) and saving the data back to the file. The `loadDataFromFile()` function reads the data file and populates the movie and client data structures, while the `saveDataToFile()` function saves the updated data back to the file.
+- **File I/O**: The code implements functions for reading movie and user data from a data file (`1data.dat`) and saving the data back to the file. The `loadDataFromFile()` function reads the data file and populates the movie and user data structures, while the `saveDataToFile()` function saves the updated data back to the file.
 
 - **Input Validation**: To ensure data integrity and prevent inconsistencies, the code includes various input validation checks. It validates full names, phone numbers, email addresses, seat availability, and duplicate entries. These validations ensure that the data entered by users or administrators meets the required format and avoids conflicts with existing records.
 
