@@ -49,9 +49,9 @@ void showAdminConsole();
 void showUserConsole();
 void bookMovie();
 void uploadMovie();
-void viewClients();
-void modifyClient();
-void deleteClient();
+void viewUsers();
+void modifyUser();
+void deleteUser();
 void saveDataToFile();
 void loadDataFromFile();
 void modifyMovieInfo();
@@ -218,7 +218,7 @@ void showAdminConsole() {
     while (true) {
         std::cout << "Admin Console\n";
         std::cout << "1. Upload a movie\n";
-        std::cout << "2. View clients booked movie\n";
+        std::cout << "2. View users booked movie\n";
         std::cout << "3. Modify a user's booked movie\n";
         std::cout << "4. Delete a user's booked movie\n";
         std::cout << "5. Modify movie information\n";
@@ -240,15 +240,15 @@ void showAdminConsole() {
         break;
     case 2:
         std::cout << "View clients booked movie\n";
-        viewClients();
+        viewUsers();
         break;
     case 3:
         std::cout << "Modify a client's booked movie\n";
-        modifyClient();
+        modifyUser();
         break;
     case 4:
         std::cout << "Delete a client's booked movie\n";
-        deleteClient();
+        deleteUser();
         break;
     case 5:
         std::cout << "Modify movie information\n";
@@ -362,7 +362,7 @@ void uploadMovie() {
     }
 
     while (true) {
-        std::cout << "Available time (hh:mmAM/PM, between 8:00AM and 11:00PM): ";
+        std::cout << "Available time (hh:mmAM/PM: ";
         std::getline(std::cin, input);
 
         if (input == "abort") {
@@ -412,6 +412,7 @@ void uploadMovie() {
         }         else if (input == "no") {
                         movies[movie.title] = movie;
                         saveDataToFile();
+                        loadDataFromFile();
                         std::cout << "Movie uploaded successfully!\n";
                         viewMovieInfo();
                         return;
@@ -436,7 +437,7 @@ void uploadMovie() {
     viewMovieInfo();
 }
 
-void viewClients() {
+void viewUsers() {
     loadDataFromFile();
     clearScreen();
     std::cout << "View clients who have booked a movie:\n\n";
@@ -476,7 +477,7 @@ void viewClients() {
 
             // Display available time if it's not empty
             if (!client.availableTime.empty()) {
-                std::cout << "Available Time: " << std::left << std::setw(maxAvailableTimeLength) << client.availableTime << "\n";
+                std::cout << "choosen Time: " << std::left << std::setw(maxAvailableTimeLength) << client.availableTime << "\n";
             }
 
             std::cout << std::string(maxNameLength + maxPhoneNumberLength + maxEmailAddressLength +
@@ -491,8 +492,8 @@ void viewClients() {
 
 
 
-void modifyClient() {
-    loadDataFromFile();
+void modifyUser() {
+
     clearScreen();
     std::cout << "Modify a client's booked movie\n";
     std::cout << "(enter 'abort' to cancel)\n";
@@ -650,7 +651,7 @@ void modifyClient() {
     saveDataToFile();
 
     std::cout << "Client information modified successfully!\n";
-    viewClients();
+    viewUsers();
 }
 
 void modifyMovieInfo() {
@@ -803,6 +804,7 @@ void modifyMovieInfo() {
                 } else if (input == "no") {
                     std::cout << "Movie modification completed.\n";
                     saveDataToFile();
+                    loadDataFromFile();
                     return;
                 } else {
                     std::cout << "Invalid input! Enter 'yes' or 'no'.\n";
@@ -877,7 +879,7 @@ void viewMovieInfo() {
     }
 }
 
-void deleteClient() {
+void deleteUser() {
     loadDataFromFile();
     clearScreen();
     std::cout << "Delete a client's booked movie\n\n";
@@ -934,7 +936,9 @@ void deleteClient() {
             }
 
             clients.erase(clients.begin() + clientIndex);
+
             saveDataToFile();
+            loadDataFromFile();
             std::cout << "Client information deleted successfully!\n";
         } else {
             std::cout << "Deletion canceled.\n";
@@ -1099,6 +1103,7 @@ void deleteMovie() {
 
                 movies.erase(iter);
                 saveDataToFile();
+                loadDataFromFile();
 
                 std::cout << "Movie deleted successfully!\n";
                 break;
@@ -1313,6 +1318,7 @@ void bookMovie() {
 user.movieTitle = movie->title;
 clients.push_back(user);
 saveDataToFile();
+loadDataFromFile();
 
 std::cout << "\nMovie booked successfully!\n";
 
