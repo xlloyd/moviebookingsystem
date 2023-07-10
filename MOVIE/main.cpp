@@ -23,7 +23,7 @@ struct Movie {
 };
 
 
-struct Client {
+struct User {
     std::string name;
     std::string phoneNumber;
     std::string emailAddress;
@@ -33,7 +33,7 @@ struct Client {
 };
 
 std::unordered_map<std::string, Movie> movies;
-std::vector<Client> clients;
+std::vector<User> users;
 
 
 void clearScreen() {
@@ -94,8 +94,8 @@ bool isValidFullName(const std::string& name) {
 }
 
 bool isDuplicateFullName(const std::string& name) {
-    for (const auto& client : clients) {
-        if (client.name == name) {
+    for (const auto& user : users) {
+        if (user.name == name) {
             return true;
         }
     }
@@ -105,8 +105,8 @@ bool isValidPhoneNumber(const std::string& phoneNumber) {
     return phoneNumber.length() == 11 && std::all_of(phoneNumber.begin(), phoneNumber.end(), ::isdigit);
 }
 bool isDuplicatePhoneNumber(const std::string& phoneNumber) {
-    for (const auto& client : clients) {
-        if (client.phoneNumber == phoneNumber) {
+    for (const auto& user : users) {
+        if (user.phoneNumber == phoneNumber) {
             return true;
         }
     }
@@ -118,8 +118,8 @@ bool isValidEmailAddress(const std::string& emailAddress) {
 }
 
 bool isDuplicateEmailAddress(const std::string& emailAddress) {
-    for (const auto& client : clients) {
-        if (client.emailAddress == emailAddress) {
+    for (const auto& user : users) {
+        if (user.emailAddress == emailAddress) {
             return true;
         }
     }
@@ -239,15 +239,15 @@ void showAdminConsole() {
         uploadMovie();
         break;
     case 2:
-        std::cout << "View clients booked movie\n";
+        std::cout << "View users booked movie\n";
         viewUsers();
         break;
     case 3:
-        std::cout << "Modify a client's booked movie\n";
+        std::cout << "Modify a user's booked movie\n";
         modifyUser();
         break;
     case 4:
-        std::cout << "Delete a client's booked movie\n";
+        std::cout << "Delete a user's booked movie\n";
         deleteUser();
         break;
     case 5:
@@ -440,10 +440,10 @@ void uploadMovie() {
 void viewUsers() {
     loadDataFromFile();
     clearScreen();
-    std::cout << "View clients who have booked a movie:\n\n";
+    std::cout << "View users who have booked a movie:\n\n";
 
-    // Sort clients by name
-    std::sort(clients.begin(), clients.end(), [](const Client& a, const Client& b) {
+
+    std::sort(users.begin(), users.end(), [](const User& a, const User& b) {
         return a.name < b.name;
     });
 
@@ -455,29 +455,29 @@ void viewUsers() {
     size_t maxCinemaLength = 0;
     size_t maxAvailableTimeLength = 0;
 
-    for (const auto& client : clients) {
-        if (!client.movieTitle.empty()) { // Display only if movie title is not empty
-            maxNameLength = std::max(maxNameLength, client.name.length());
-            maxPhoneNumberLength = std::max(maxPhoneNumberLength, client.phoneNumber.length());
-            maxEmailAddressLength = std::max(maxEmailAddressLength, client.emailAddress.length());
-            maxMovieTitleLength = std::max(maxMovieTitleLength, client.movieTitle.length());
-            maxCinemaLength = std::max(maxCinemaLength, movies[client.movieTitle].cinema.length());
-            maxAvailableTimeLength = std::max(maxAvailableTimeLength, client.availableTime.length());
+    for (const auto& user : users) {
+        if (!user.movieTitle.empty()) { // Display only if movie title is not empty
+            maxNameLength = std::max(maxNameLength, user.name.length());
+            maxPhoneNumberLength = std::max(maxPhoneNumberLength, user.phoneNumber.length());
+            maxEmailAddressLength = std::max(maxEmailAddressLength, user.emailAddress.length());
+            maxMovieTitleLength = std::max(maxMovieTitleLength, user.movieTitle.length());
+            maxCinemaLength = std::max(maxCinemaLength, movies[user.movieTitle].cinema.length());
+            maxAvailableTimeLength = std::max(maxAvailableTimeLength, user.availableTime.length());
         }
     }
 
-    // Display client information
-    for (const auto& client : clients) {
-        if (!client.movieTitle.empty()) { // Display only if movie title is not empty
-            std::cout << "Name: " << std::left << std::setw(maxNameLength) << client.name << "\n";
-            std::cout << "Phone Number: " << std::left << std::setw(maxPhoneNumberLength) << client.phoneNumber << "\n";
-            std::cout << "Email Address: " << std::left << std::setw(maxEmailAddressLength) << client.emailAddress << "\n";
-            std::cout << "Movie Title: " << std::left << std::setw(maxMovieTitleLength) << client.movieTitle << "\n";
-            std::cout << "Cinema: " << std::left << std::setw(maxCinemaLength) << movies[client.movieTitle].cinema << "\n";
+
+    for (const auto& user : users) {
+        if (!user.movieTitle.empty()) { // Display only if movie title is not empty
+            std::cout << "Name: " << std::left << std::setw(maxNameLength) << user.name << "\n";
+            std::cout << "Phone Number: " << std::left << std::setw(maxPhoneNumberLength) << user.phoneNumber << "\n";
+            std::cout << "Email Address: " << std::left << std::setw(maxEmailAddressLength) << user.emailAddress << "\n";
+            std::cout << "Movie Title: " << std::left << std::setw(maxMovieTitleLength) << user.movieTitle << "\n";
+            std::cout << "Cinema: " << std::left << std::setw(maxCinemaLength) << movies[user.movieTitle].cinema << "\n";
 
             // Display available time if it's not empty
-            if (!client.availableTime.empty()) {
-                std::cout << "choosen Time: " << std::left << std::setw(maxAvailableTimeLength) << client.availableTime << "\n";
+            if (!user.availableTime.empty()) {
+                std::cout << "choosen Time: " << std::left << std::setw(maxAvailableTimeLength) << user.availableTime << "\n";
             }
 
             std::cout << std::string(maxNameLength + maxPhoneNumberLength + maxEmailAddressLength +
@@ -494,21 +494,23 @@ void viewUsers() {
 
 void modifyUser() {
 
+    loadDataFromFile();
+
     clearScreen();
-    std::cout << "Modify a client's booked movie\n";
+    std::cout << "Modify a user's booked movie\n";
     std::cout << "(enter 'abort' to cancel)\n";
 
-    std::sort(clients.begin(), clients.end(), [](const Client& a, const Client& b) {
+    std::sort(users.begin(), users.end(), [](const User& a, const User& b) {
         return a.name < b.name;
     });
 
-    for (size_t i = 0; i < clients.size(); ++i) {
-        std::cout << i + 1 << ". " << clients[i].name << "\n";
+    for (size_t i = 0; i < users.size(); ++i) {
+        std::cout << i + 1 << ". " << users[i].name << "\n";
     }
 
     std::string indexStr;
     size_t index;
-    std::cout << "Enter the index number of the client to modify: ";
+    std::cout << "Enter the index number of the user to modify: ";
     std::getline(std::cin, indexStr);
 
     if (indexStr == "abort") {
@@ -518,12 +520,12 @@ void modifyUser() {
     clearScreen();
     std::stringstream(indexStr) >> index;
 
-    if (index <= 0 || index > clients.size()) {
+    if (index <= 0 || index > users.size()) {
         std::cout << "Invalid index number!\n";
         return;
     }
 
-    Client& client = clients[index - 1];
+    User& user = users[index - 1];
 
     std::cout << "Select the action to modify:\n";
     std::cout << "(enter 'abort' to cancel)\n";
@@ -549,7 +551,7 @@ void modifyUser() {
         case 1: {
             std::cout << "Enter 'abort' to cancel or enter 'skip' to the information.\n";
             std::string newName;
-            std::cout << "Name (" << client.name << "): ";
+            std::cout << "Name (" << user.name << "): ";
             std::getline(std::cin, newName);
             if (newName == "abort") {
                 std::cout << "Modification process aborted.\n";
@@ -562,14 +564,14 @@ void modifyUser() {
                     std::cout << "Name already exists! Please enter a different name.\n";
                     return;
                 }
-                client.name = newName;
+                user.name = newName;
             }
             break;
         }
         case 2: {
             std::cout << "enter 'abort' to cancel, enter 'skip' to remain the information.\n";
             std::string newPhoneNumber;
-            std::cout << "Phone number (" << client.phoneNumber << "): ";
+            std::cout << "Phone number (" << user.phoneNumber << "): ";
             std::getline(std::cin, newPhoneNumber);
             if (newPhoneNumber == "abort") {
                 std::cout << "Modification process aborted.\n";
@@ -582,14 +584,14 @@ void modifyUser() {
                     std::cout << "Phone number already exists! Please enter a different phone number.\n";
                     return;
                 }
-                client.phoneNumber = newPhoneNumber;
+                user.phoneNumber = newPhoneNumber;
             }
             break;
         }
         case 3: {
             std::cout << "enter 'abort' to cancel, enter 'skip' to remain the information.\n";
             std::string newEmailAddress;
-            std::cout << "Email address (" << client.emailAddress << "): ";
+            std::cout << "Email address (" << user.emailAddress << "): ";
             std::getline(std::cin, newEmailAddress);
             if (newEmailAddress == "abort") {
                 std::cout << "Modification process aborted.\n";
@@ -603,14 +605,14 @@ void modifyUser() {
                     std::cout << "Email address already exists! Please enter a different email address.\n";
                     return;
                 }
-                client.emailAddress = newEmailAddress;
+                user.emailAddress = newEmailAddress;
             }
             break;
         }
         case 4: {
     std::cout << "enter 'abort' to cancel, enter 'skip' to remain the information.\n";
     std::string newMovieTitle;
-    std::cout << "Movie title (" << client.movieTitle << "): ";
+    std::cout << "Movie title (" << user.movieTitle << "): ";
     std::getline(std::cin, newMovieTitle);
     if (newMovieTitle == "abort") {
         std::cout << "Modification process aborted.\n";
@@ -621,7 +623,7 @@ void modifyUser() {
             std::cout << "Movie title not found! Please enter a valid movie title.\n";
             return;
         }
-        client.movieTitle = newMovieTitle;
+        user.movieTitle = newMovieTitle;
     }
     break;
 }
@@ -629,7 +631,7 @@ void modifyUser() {
         case 5: {
             std::cout << "enter 'abort' to cancel, enter 'skip' to remain the information.\n";
             std::string newTime;
-            std::cout << "Available time (" << client.availableTime <<"): ";
+            std::cout << "Available time (" << user.availableTime <<"): ";
             std::getline(std::cin, newTime);
             if (newTime == "abort") {
                 std::cout << "Modification process aborted.\n";
@@ -639,7 +641,7 @@ void modifyUser() {
                     std::cout << "Invalid time format! Please use the format 'hh:mmAM' or 'hh:mmPM'.\n";
                     return;
                 }
-                client.availableTime = newTime;
+                user.availableTime = newTime;
             }
             break;
         }
@@ -650,7 +652,7 @@ void modifyUser() {
 
     saveDataToFile();
 
-    std::cout << "Client information modified successfully!\n";
+    std::cout << "User's information modified successfully!\n";
     viewUsers();
 }
 
@@ -882,64 +884,64 @@ void viewMovieInfo() {
 void deleteUser() {
     loadDataFromFile();
     clearScreen();
-    std::cout << "Delete a client's booked movie\n\n";
+    std::cout << "Delete a user's booked movie\n\n";
     std::cout << "Enter 'abort' at any time to cancel.\n\n";
 
-    std::sort(clients.begin(), clients.end(), [](const Client& a, const Client& b) {
+    std::sort(users.begin(), users.end(), [](const User& a, const User& b) {
         return a.name < b.name;
     });
 
-    std::vector<Client> bookedClients;
-    for (const auto& client : clients) {
-        if (!client.movieTitle.empty()) {
-            bookedClients.push_back(client);
+    std::vector<User> bookedUsers;
+    for (const auto& user : users) {
+        if (!user.movieTitle.empty()) {
+            bookedUsers.push_back(user);
         }
     }
 
-    if (bookedClients.empty()) {
-        std::cout << "No clients found.\n";
+    if (bookedUsers.empty()) {
+        std::cout << "No users found.\n";
         return;
     }
 
-    for (size_t i = 0; i < bookedClients.size(); ++i) {
-        std::cout << i + 1 << ". " << bookedClients[i].name << "\n";
+    for (size_t i = 0; i < bookedUsers.size(); ++i) {
+        std::cout << i + 1 << ". " << bookedUsers[i].name << "\n";
     }
 
     std::string indexStr;
     int index;
-    std::cout << "\nEnter the index number of the client to delete: ";
+    std::cout << "\nEnter the index number of the user to delete: ";
     std::getline(std::cin, indexStr);
 
     if (indexStr == "abort") {
-        std::cout << "Client deletion aborted.\n";
+        std::cout << "User deletion aborted.\n";
         return;
     }
 
     try {
         index = std::stoi(indexStr);
 
-        if (index <= 0 || index > static_cast<int>(bookedClients.size())) {
+        if (index <= 0 || index > static_cast<int>(bookedUsers.size())) {
             throw std::out_of_range("Invalid index number!");
         }
 
-        std::cout << "Are you sure you want to delete the client's information? (yes/no): ";
+        std::cout << "Are you sure you want to delete the user's information? (yes/no): ";
         std::string confirm;
         std::getline(std::cin, confirm);
 
         if (confirm == "yes") {
-            size_t clientIndex = 0;
-            for (size_t i = 0; i < clients.size(); ++i) {
-                if (clients[i].name == bookedClients[index - 1].name) {
-                    clientIndex = i;
+            size_t userIndex = 0;
+            for (size_t i = 0; i < users.size(); ++i) {
+                if (users[i].name == bookedUsers[index - 1].name) {
+                    userIndex = i;
                     break;
                 }
             }
 
-            clients.erase(clients.begin() + clientIndex);
+            users.erase(users.begin() + userIndex);
 
             saveDataToFile();
             loadDataFromFile();
-            std::cout << "Client information deleted successfully!\n";
+            std::cout << "User information deleted successfully!\n";
         } else {
             std::cout << "Deletion canceled.\n";
         }
@@ -971,15 +973,15 @@ void saveDataToFile() {
         outFile << movie.second.cinema << "\n"; // Add cinema to the file
     }
 
-    // Write client data
-    outFile << clients.size() << "\n";
-    for (const auto& client : clients) {
-        outFile << client.name << "\n";
-        outFile << client.phoneNumber << "\n";
-        outFile << client.emailAddress << "\n";
-        outFile << client.movieTitle << "\n";
-        outFile << client.availableTime << "\n";
-        outFile << client.cinema << "\n"; // Add cinema to the file
+
+    outFile << users.size() << "\n";
+    for (const auto& user : users) {
+        outFile << user.name << "\n";
+        outFile << user.phoneNumber << "\n";
+        outFile << user.emailAddress << "\n";
+        outFile << user.movieTitle << "\n";
+        outFile << user.availableTime << "\n";
+        outFile << user.cinema << "\n"; // Add cinema to the file
     }
 
     outFile.close();
@@ -993,7 +995,7 @@ void loadDataFromFile() {
     }
 
     movies.clear();
-    clients.clear();
+    users.clear();
 
     // Read movie data
     int movieCount;
@@ -1017,19 +1019,19 @@ void loadDataFromFile() {
         movies[movie.title] = movie;
     }
 
-    // Read client data
-    int clientCount;
-    inFile >> clientCount;
+
+    int userCount;
+    inFile >> userCount;
     inFile.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    for (int i = 0; i < clientCount; ++i) {
-        Client client;
-        std::getline(inFile, client.name);
-        std::getline(inFile, client.phoneNumber);
-        std::getline(inFile, client.emailAddress);
-        std::getline(inFile, client.movieTitle);
-        std::getline(inFile, client.availableTime);
-        std::getline(inFile, client.cinema); // Read cinema from the file
-        clients.push_back(client);
+    for (int i = 0; i < userCount; ++i) {
+        User user;
+        std::getline(inFile, user.name);
+        std::getline(inFile, user.phoneNumber);
+        std::getline(inFile, user.emailAddress);
+        std::getline(inFile, user.movieTitle);
+        std::getline(inFile, user.availableTime);
+        std::getline(inFile, user.cinema); // Read cinema from the file
+        users.push_back(user);
     }
 
     inFile.close();
@@ -1094,10 +1096,10 @@ void deleteMovie() {
             std::getline(std::cin, confirm);
 
             if (confirm == "yes") {
-                for (auto& client : clients) {
-                    if (client.movieTitle == movieTitle) {
-                        client.movieTitle.clear();
-                        client.availableTime.clear();
+                for (auto& user : users) {
+                    if (user.movieTitle == movieTitle) {
+                        user.movieTitle.clear();
+                        user.availableTime.clear();
                     }
                 }
 
@@ -1229,7 +1231,7 @@ void bookMovie() {
     std::cout << "\n[Booking Process]\n";
     std::cout << "Enter 'abort' at any time to cancel.\n\n";
 
-    Client user;
+    User user;
 
     while (true) {
         std::cout << "Enter your full name: ";
@@ -1316,7 +1318,7 @@ void bookMovie() {
 }
 
 user.movieTitle = movie->title;
-clients.push_back(user);
+users.push_back(user);
 saveDataToFile();
 loadDataFromFile();
 
