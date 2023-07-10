@@ -4,6 +4,14 @@
 
 The Movie Booking System is a command-line application implemented in C++. It allows users to book movie tickets, view movie information, and manage client data. The program provides separate consoles for administrators and users, each with different functionalities.
 
+This code uses the following data structures:
+
+1. `std::unordered_map<std::string, Movie> movies`: This unordered map stores movies as key-value pairs, where the movie title is the key and the associated movie information is the value. It allows fast access to movie information based on the title.
+
+2. `std::vector<Client> clients`: This vector stores client information. Each element in the vector represents a client and contains various attributes such as name, phone number, email address, movie title, available time, and cinema. The vector allows storing and accessing multiple client records.
+
+Both data structures are used to store and manage movie and client data, respectively, throughout the program. The unordered map provides efficient lookup based on movie titles, while the vector allows storing and iterating over multiple client records.
+
 ### Features
 
 - **Admin Console**: The Admin Console provides functionalities for administrators to perform various tasks:
