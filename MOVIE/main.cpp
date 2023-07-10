@@ -760,9 +760,10 @@ void modifyMovieInfo() {
     std::cout << "Available times:\n";
     std::cout << "'abort' to cancel.\n";
 
-    for (int i = 0; i < movie.availableTimes.size(); ++i) {
-        std::cout << i + 1 << ". " << movie.availableTimes[i] << std::endl;
-    }
+    for (unsigned int i = 0; i < movie.availableTimes.size(); ++i) {
+    std::cout << i + 1 << ". " << movie.availableTimes[i] << std::endl;
+}
+
 
     std::cout << "Select the index of the time to modify: ";
     std::getline(std::cin, input);
@@ -774,9 +775,9 @@ void modifyMovieInfo() {
 
     if (std::isdigit(input[0])) {
         int index = std::stoi(input) - 1;
-        if (index >= 0 && index < movie.availableTimes.size()) {
-            std::string selectedTime = movie.availableTimes[index];
-            std::cout << "Selected time: " << selectedTime << std::endl;
+        if (index >= 0 && static_cast<size_t>(index) < movie.availableTimes.size()) {
+    std::string selectedTime = movie.availableTimes[index];
+    std::cout << "Selected time: " << selectedTime << std::endl;
 
             while (true) {
                 std::cout << "Enter the modified time: ";
