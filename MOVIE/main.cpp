@@ -219,8 +219,8 @@ void showAdminConsole() {
         std::cout << "Admin Console\n";
         std::cout << "1. Upload a movie\n";
         std::cout << "2. View clients booked movie\n";
-        std::cout << "3. Modify a client's booked movie\n";
-        std::cout << "4. Delete a client's booked movie\n";
+        std::cout << "3. Modify a user's booked movie\n";
+        std::cout << "4. Delete a user's booked movie\n";
         std::cout << "5. Modify movie information\n";
         std::cout << "6. View movies info\n";
         std::cout << "7. delete a movie\n";
@@ -492,6 +492,7 @@ void viewClients() {
 
 
 void modifyClient() {
+    loadDataFromFile();
     clearScreen();
     std::cout << "Modify a client's booked movie\n";
     std::cout << "(enter 'abort' to cancel)\n";
@@ -653,6 +654,7 @@ void modifyClient() {
 }
 
 void modifyMovieInfo() {
+    loadDataFromFile();
     clearScreen();
     std::cout << "Modify movie information\n\n";
     std::cout << "Enter 'abort' at any time to cancel.\n\n";
@@ -876,6 +878,7 @@ void viewMovieInfo() {
 }
 
 void deleteClient() {
+    loadDataFromFile();
     clearScreen();
     std::cout << "Delete a client's booked movie\n\n";
     std::cout << "Enter 'abort' at any time to cancel.\n\n";
@@ -1030,6 +1033,8 @@ void loadDataFromFile() {
 
 
 void deleteMovie() {
+    loadDataFromFile();
+
     clearScreen();
     std::cout << "Delete a movie\n\n";
     std::cout << "Enter 'abort' at any time to cancel.\n\n";
@@ -1131,6 +1136,7 @@ void showUserConsole() {
     std::cout << "------------\n\n";
     clearScreen();
     while (true) {
+        std::cout << "HELLO PLEASE CHOOSE\n";
         std::cout << "1. Book a movie\n";
         std::cout << "2. Exit\n";
         std::cout << "Enter your choice (1-2): ";
@@ -1161,11 +1167,13 @@ void showUserConsole() {
 }
 
 void bookMovie() {
-    std::cout << "Available Movies:\n";
-    std::cout << "-----------------\n\n";
 
+    loadDataFromFile();
     clearScreen();
 
+    std::cout << "Available Movies:\n";
+    std::cout<< "'abort' to cancel\n";
+    std::cout << "-----------------\n\n";
     std::vector<std::string> movieTitles;
     for (const auto& movie : movies) {
         movieTitles.push_back(movie.first);
@@ -1185,7 +1193,6 @@ void bookMovie() {
         std::cout << "\n";
         std::cout << "-------------------------\n";
     }
-
     std::cout << "\nEnter the movie title you want to book: ";
     std::string movieTitle;
     std::getline(std::cin, movieTitle);
@@ -1217,20 +1224,20 @@ void bookMovie() {
     std::cout << "\n[Booking Process]\n";
     std::cout << "Enter 'abort' at any time to cancel.\n\n";
 
-    Client client;
+    Client user;
 
     while (true) {
         std::cout << "Enter your full name: ";
-        std::getline(std::cin, client.name);
+        std::getline(std::cin, user.name);
 
-        if (client.name == "abort") {
+        if (user.name == "abort") {
             std::cout << "Booking process canceled.\n";
             return;
         }
 
-        if (!isValidFullName(client.name)) {
+        if (!isValidFullName(user.name)) {
             std::cout << "Invalid full name! Please enter a valid full name.\n";
-        } else if (isDuplicateFullName(client.name)) {
+        } else if (isDuplicateFullName(user.name)) {
             std::cout << "Name already exists! Please enter a different name.\n";
         } else {
             break;
@@ -1239,16 +1246,16 @@ void bookMovie() {
 
     while (true) {
         std::cout << "Enter your phone number (11 digits): ";
-        std::getline(std::cin, client.phoneNumber);
+        std::getline(std::cin, user.phoneNumber);
 
-        if (client.phoneNumber == "abort") {
+        if (user.phoneNumber == "abort") {
             std::cout << "Booking process canceled.\n";
             return;
         }
 
-        if (!isValidPhoneNumber(client.phoneNumber)) {
+        if (!isValidPhoneNumber(user.phoneNumber)) {
             std::cout << "Invalid phone number! Please enter a valid 11-digit phone number.\n";
-        } else if (isDuplicatePhoneNumber(client.phoneNumber)) {
+        } else if (isDuplicatePhoneNumber(user.phoneNumber)) {
             std::cout << "Phone number already exists! Please enter a different phone number.\n";
         } else {
             break;
@@ -1257,49 +1264,61 @@ void bookMovie() {
 
     while (true) {
         std::cout << "Enter your email address: ";
-        std::getline(std::cin, client.emailAddress);
+        std::getline(std::cin, user.emailAddress);
 
-        if (client.emailAddress == "abort") {
+        if (user.emailAddress == "abort") {
             std::cout << "Booking process canceled.\n";
             return;
         }
 
-        if (!isValidEmailAddress(client.emailAddress)) {
+        if (!isValidEmailAddress(user.emailAddress)) {
             std::cout << "Invalid email address! Please enter a valid email address.\n";
-        } else if (isDuplicateEmailAddress(client.emailAddress)) {
+        } else if (isDuplicateEmailAddress(user.emailAddress)) {
             std::cout << "Email address already exists! Please enter a different email address.\n";
         } else {
             break;
         }
     }
 
+    clearScreen();
+
     while (true) {
-        std::cout << "Select available time: ";
-        std::string time;
-        std::getline(std::cin, time);
+    std::cout << "Available times:\n";
+    std::cout << "'abort' to cancel.\n";
 
-        if (time == "abort") {
-            std::cout << "Booking process canceled.\n";
-            return;
-        }
-
-        if (!isTimeAvailable(movie->availableTimes, time)) {
-            std::cout << "Invalid time or time is not available! Please enter a valid and available time.\n";
-        } else {
-            client.availableTime = time;
-            break;
-        }
+    for (size_t i = 0; i < movie->availableTimes.size(); ++i) {
+        std::cout << i + 1 << ". " << movie->availableTimes[i] << std::endl;
     }
 
-    client.movieTitle = movie->title;
-    clients.push_back(client);
-    saveDataToFile();
+    std::cout << "Select the index of the available time: ";
+    std::string input;
+    std::getline(std::cin, input);
 
-    std::cout << "\nMovie booked successfully!\n";
+    if (input == "abort") {
+        std::cout << "Booking process canceled.\n";
+        return;
+    }
 
-    clearScreen();
+    int selectedIndex = std::stoi(input) - 1;
+
+    if (selectedIndex >= 0 && static_cast<size_t>(selectedIndex) < movie->availableTimes.size()) {
+        std::string selectedTime = movie->availableTimes[selectedIndex];
+        user.availableTime = selectedTime;
+        break;
+    } else {
+        std::cout << "Invalid index! Please enter a valid index.\n";
+    }
 }
 
+user.movieTitle = movie->title;
+clients.push_back(user);
+saveDataToFile();
+
+std::cout << "\nMovie booked successfully!\n";
+
+clearScreen();
+
+}
 
 int main() {
 
@@ -1343,4 +1362,3 @@ int main() {
 
     return 0;
 }
-
