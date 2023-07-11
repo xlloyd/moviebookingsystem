@@ -13,48 +13,47 @@ The code utilizes the following data structures:
 
 - `std::unordered_map<std::string, Movie>`: This unordered map stores movies as key-value pairs, where the movie title is the key and the associated movie information is the value. It allows fast access to movie information based on the title.
 
-- `std::vector<User>`: This vector stores user information. Each element in the vector represents a user and contains attributes such as name, phone number, email address, movie title, available time, and cinema. The vector allows storing and accessing multiple user records.
+- `std::vector<User>`: This vector stores user information. Each element in the vector represents a user and contains attributes such as name, phone number, and email address. The vector allows storing and accessing multiple user records.
 
 Both data structures are used to store and manage movie and user data, respectively, throughout the program. The unordered map provides efficient lookup based on movie titles, while the vector allows storing and iterating over multiple user records.
 
-## Features
+## Algorithms
+
+The program incorporates various algorithms to implement its functionality:
+
+- **Input Validation**: The program uses regular expressions (`std::regex_match`) to validate user input, such as full names, phone numbers, and email addresses. Regular expressions allow for pattern matching and ensure that the entered data meets the required format.
+
+- **Error Handling**: Error handling techniques are used to handle invalid user input gracefully. The program provides meaningful error messages to guide the user in correcting their input and prevents the program from crashing due to unexpected input.
+
+- **Sorting**: The `std::sort` algorithm is used to sort movie titles in alphabetical order. This allows for a more organized display of movie information.
+
+## Functionality
 
 ### Admin Console
 
 The Admin Console provides functionalities for administrators to perform various tasks:
 
-- Add new movies: Administrators can add new movies to the system by providing details such as movie title, price, duration, and available showtimes.
-- Delete movies: Administrators can delete movies from the system if they are no longer available.
-- Modify movie details: Administrators can modify the details of existing movies, such as title, price, duration, and available showtimes.
-- View movie information: Administrators can view detailed information about each movie, including its title, price, duration, available showtimes, and the number of booked seats.
-- View user information: Administrators can view information about the users who have booked movie tickets, including their names, phone numbers, email addresses, booked seats, and available showtimes.
-- Modify user details: Administrators can modify the details of users, such as their names, phone numbers, email addresses, booked seats, and available showtimes.
-- Delete user information: Administrators can delete user records from the system if necessary.
+- **Add new movies**: Administrators can add new movies to the system by providing details such as movie title, price, duration, and available showtimes. The program adds the new movie to the `std::unordered_map` of movies.
+
+- **Delete movies**: Administrators can delete movies from the system if they are no longer available. The program removes the movie from the `std::unordered_map` of movies.
+
+- **Modify movie details**: Administrators can modify the details of existing movies, such as title, price, duration, and available showtimes. The program updates the corresponding movie information in the `std::unordered_map` of movies.
+
+- **View movie information**: Administrators can view detailed information about each movie, including its title, price, duration, available showtimes, and the number of booked seats. The program retrieves the movie information from the `std::unordered_map` of movies and displays it.
+
+- **View user information**: Administrators can view information about the users who have booked movie tickets, including their names, phone numbers, and email addresses. The program retrieves the user information from the `std::vector` of users and displays it.
+
+- **Modify user details**: Administrators can modify the details of users, such as their names, phone numbers, and email addresses. The program updates the corresponding user information in the `std::vector` of users.
+
+- **Delete user information**: Administrators can delete user records from the system if necessary. The program removes the user record from the `std::vector` of users.
 
 ### User Console
 
 The User Console allows users to book movie tickets:
 
-- View available movies: Users can view a list of available movies, including their titles, prices, durations, and available showtimes.
-- Book movie tickets: Users can select a movie from the available list and proceed to book tickets by providing their personal information, including their full name, phone number, email address, and selected seats.
-- Seat availability check: The system checks the availability of the selected seats and ensures they are not already booked.
-- Confirmation and saving: Once the user confirms the booking, the system saves the booking information and updates the availability of the selected seats.
+- **View available movies**: Users can view a list of available movies, including their titles, prices, durations, and available showtimes. The program retrieves the movie information from the `std::unordered_map` of movies and displays it.
 
-## Key Components
-
-The Movie Booking System code utilizes several important components:
-
-- **Structs and Classes**: The code defines two main structures, `Movie` and `User`, to store movie and user information, respectively. The `Movie` struct includes attributes such as title, price, duration, available showtimes, and the number of booked seats. The `User` struct stores details about the user, including their name, phone number, email address, booked seats, and available showtimes.
-
-- **Data Storage**: The movie data is stored using a `std::unordered_map` container, where the movie title serves as the key and the corresponding `Movie` struct is the value. This data structure allows for efficient lookup based on the movie title, enabling quick retrieval of movie information. The user data is stored in a `std::vector` of `User` structs, allowing for dynamic addition and removal of user records.
-
-- **File I/O**: The code implements functions for reading movie and user data from a data file (`1data.dat`) and saving the data back to the file. The `loadDataFromFile()` function reads the data file and populates the movie and user data structures, while the `saveDataToFile()` function saves the updated data back to the file.
-
-- **Input Validation**: To ensure data integrity and prevent inconsistencies, the code includes various input validation checks. It validates full names, phone numbers, email addresses, seat availability, and duplicate entries. These validations ensure that the data entered by users or administrators meets the required format and avoids conflicts with existing records.
-
-- **Error Handling**: The program incorporates error handling techniques to handle invalid user input gracefully. It provides meaningful error messages to guide the user in correcting their input and prevents the program from crashing due to unexpected input.
-
-- **Utility Functions**: The code includes several utility functions to perform common tasks. These functions include clearing the console screen, parsing seat information, and validating input formats. These utility functions help streamline the code and enhance its readability.
+- **Book movie tickets**: Users can select a movie from the available list and proceed to book tickets by providing their personal information, including their full name, phone number, and email address. The program creates a new user record and adds it to the `std::vector` of users.
 
 ## Libraries Used
 
@@ -63,6 +62,7 @@ The following libraries are used in the code:
 - `iostream`: Provides input/output stream operations for reading input from the user (`std::cin`) and displaying output to the console (`std::cout`).
 - `fstream`: Enables file stream operations, allowing reading from and writing to files (`std::ifstream`, `std::ofstream`).
 - `sstream`: Provides string stream operations for reading from and writing to strings (`std::stringstream`).
+- `cstdlib`: Provides general-purpose functions for C programming language.
 - `unordered_map`: Used for storing key-value pairs in an unordered map data structure. In this code, it is used to store movie information, with the movie title as the key and the corresponding movie details as the value (`std::unordered_map<std::string, Movie>`).
 - `vector`: Supports dynamic arrays and is used to store lists of movie titles and user information (`std::vector<std::string>`, `std::vector<User>`).
 - `algorithm`: Provides various algorithms such as sorting (`std::sort`) and finding the maximum value (`std::max`). It is used in this code to sort movie titles and format output.
@@ -87,7 +87,7 @@ To use the Movie Booking System:
 
 The Movie Booking System has the following dependencies:
 
-- C++ Compiler (e.g.,g++)
+- C++ Compiler (e.g., g++)
 - Standard Template Library (STL)
 
 ## Contributing
