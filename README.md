@@ -43,6 +43,8 @@ The program is structured into the following files:
 
 - `user.h` and `user.cpp`: These files contain the class definition and implementation for the User class. The User class provides functionalities for the user console, such as viewing available movies and booking movie tickets.
 
+partitioning code into separate files brings organization, modularity, collaboration, compilation efficiency, and code maintainability benefits. It is a recommended practice that helps in managing and scaling software projects effectively.
+
 ## Data Structures
 The code utilizes the following data structures:
 
