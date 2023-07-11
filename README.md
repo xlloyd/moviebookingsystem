@@ -1,14 +1,50 @@
 <div align="center">
-  <h1>Movie Booking System</h1>
-  <p>A Command-Line Application for Booking Movie Tickets</p>
+  <img src="logo.png" alt="Movie Booking System Logo">
 </div>
 
-## Introduction
+# Movie Booking System
+A Command-Line Application for Booking Movie Tickets
 
+## Introduction
 The Movie Booking System is a command-line application implemented in C++. It allows users to book movie tickets, view movie information, and manage user data. The program provides separate consoles for administrators and users, each with different functionalities.
 
-## Data Structures
+## Workflow
+The program follows the following workflow:
 
+1. **Main Menu**: The program starts by displaying the main menu, giving the user the option to log in as an admin or a user.
+
+2. **Admin Login**: If the user selects the admin option, the program prompts for an admin password. If the password is correct, the admin console is displayed.
+
+3. **Admin Console**: In the admin console, the admin can perform various actions like adding a movie, deleting a movie, viewing user information, etc.
+
+4. **User Login**: If the user selects the user option from the main menu, the user console is displayed.
+
+5. **User Console**: In the user console, the user can book a movie or exit the user console.
+
+6. **Movie Booking**: When booking a movie, the user is presented with a list of available movies and prompted to select one.
+
+7. **Select Time Slot and Provide Information**: After selecting a movie, the user is prompted to choose an available time slot and provide their information.
+
+8. **Confirmation and Next Steps**: The booking is then confirmed, and the user can choose to book another movie or exit the user console.
+
+9. **Return to Main Menu**: If the admin or user chooses to exit their respective consoles, the program returns to the main menu.
+
+10. **Program Termination**: The program continues to display the main menu until the user chooses to exit the program.
+
+## File Structure
+The program is structured into the following files:
+
+- `main.cpp`: This is the entry point of the program. It contains the main function that starts the execution of the application.
+
+- `admin.h` and `admin.cpp`: These files contain the class definition and implementation for the Admin class. The Admin class provides functionalities for the admin console, such as adding movies, deleting movies, viewing user information, etc.
+
+- `fileio.h` and `fileio.cpp`: These files contain the class definition and implementation for the FileIO class. The FileIO class handles reading from and writing to files, allowing the program to store and retrieve movie and user data.
+
+- `utils.h` and `utils.cpp`: These files contain utility functions used throughout the program, such as input validation, error handling, and formatting output.
+
+- `user.h` and `user.cpp`: These files contain the class definition and implementation for the User class. The User class provides functionalities for the user console, such as viewing available movies and booking movie tickets.
+
+## Data Structures
 The code utilizes the following data structures:
 
 - `std::unordered_map<std::string, Movie>`: This unordered map stores movies as key-value pairs, where the movie title is the key and the associated movie information is the value. It allows fast access to movie information based on the title.
@@ -18,7 +54,6 @@ The code utilizes the following data structures:
 Both data structures are used to store and manage movie and user data, respectively, throughout the program. The unordered map provides efficient lookup based on movie titles, while the vector allows storing and iterating over multiple user records.
 
 ## Algorithms
-
 The program incorporates various algorithms to implement its functionality:
 
 - **Input Validation**: The program uses regular expressions (`std::regex_match`) to validate user input, such as full names, phone numbers, and email addresses. Regular expressions allow for pattern matching and ensure that the entered data meets the required format.
@@ -27,36 +62,7 @@ The program incorporates various algorithms to implement its functionality:
 
 - **Sorting**: The `std::sort` algorithm is used to sort movie titles in alphabetical order. This allows for a more organized display of movie information.
 
-## Functionality
-
-### Admin Console
-
-The Admin Console provides functionalities for administrators to perform various tasks:
-
-- **Add new movies**: Administrators can add new movies to the system by providing details such as movie title, price, duration, and available showtimes. The program adds the new movie to the `std::unordered_map` of movies.
-
-- **Delete movies**: Administrators can delete movies from the system if they are no longer available. The program removes the movie from the `std::unordered_map` of movies.
-
-- **Modify movie details**: Administrators can modify the details of existing movies, such as title, price, duration, and available showtimes. The program updates the corresponding movie information in the `std::unordered_map` of movies.
-
-- **View movie information**: Administrators can view detailed information about each movie, including its title, price, duration, available showtimes, and the number of booked seats. The program retrieves the movie information from the `std::unordered_map` of movies and displays it.
-
-- **View user information**: Administrators can view information about the users who have booked movie tickets, including their names, phone numbers, and email addresses. The program retrieves the user information from the `std::vector` of users and displays it.
-
-- **Modify user details**: Administrators can modify the details of users, such as their names, phone numbers, and email addresses. The program updates the corresponding user information in the `std::vector` of users.
-
-- **Delete user information**: Administrators can delete user records from the system if necessary. The program removes the user record from the `std::vector` of users.
-
-### User Console
-
-The User Console allows users to book movie tickets:
-
-- **View available movies**: Users can view a list of available movies, including their titles, prices, durations, and available showtimes. The program retrieves the movie information from the `std::unordered_map` of movies and displays it.
-
-- **Book movie tickets**: Users can select a movie from the available list and proceed to book tickets by providing their personal information, including their full name, phone number, and email address. The program creates a new user record and adds it to the `std::vector` of users.
-
 ## Libraries Used
-
 The following libraries are used in the code:
 
 - `iostream`: Provides input/output stream operations for reading input from the user (`std::cin`) and displaying output to the console (`std::cout`).
@@ -75,7 +81,6 @@ The following libraries are used in the code:
 These libraries provide essential functionalities for various aspects of the code, including input/output handling, file operations, data storage, manipulation of strings, and more.
 
 ## Usage
-
 To use the Movie Booking System:
 
 1. Clone the repository and navigate to the project directory.
@@ -84,20 +89,13 @@ To use the Movie Booking System:
 4. Follow the on-screen prompts to access the admin or user console and interact with the program.
 
 ## Dependencies
-
 The Movie Booking System has the following dependencies:
 
 - C++ Compiler (e.g., g++)
 - Standard Template Library (STL)
 
 ## Contributing
-
 Contributions to the project are welcome. If you find any bugs or have suggestions for improvements, please open an issue or submit a pull request.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
 ## Acknowledgments
-
 This project was inspired by the need for a simple movie booking system. It aims to provide a foundational structure for similar applications, making it easier for developers to build upon and customize the system according to their specific requirements.
