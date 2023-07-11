@@ -1,5 +1,4 @@
 <div align="center">
-  <img src="logo.png" alt="Movie Booking System Logo">
 </div>
 
 # Movie Booking System
