@@ -45,6 +45,44 @@ The Movie Booking System code utilizes several important components:
 
 - **Utility Functions**: The code includes several utility functions to perform common tasks. These functions include clearing the console screen, parsing seat information, and validating input formats. These utility functions help streamline the code and enhance its readability.
 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <cstdlib>
+#include <unordered_map>
+#include <vector>
+#include <algorithm>
+#include <windows.h>
+#include <conio.h>
+#include <unordered_set>
+#include <iomanip>
+#include <regex>
+#include <string>
+
+<iostream>: Used for input/output stream operations. It provides functionality for reading input from the user (std::cin) and displaying output to the console (std::cout).
+
+<fstream>: Used for file stream operations. It allows reading from and writing to files (std::ifstream, std::ofstream).
+
+<sstream>: Used for string stream operations. It provides functionality for reading from and writing to strings (std::stringstream).
+
+<cstdlib>: Used for general-purpose functions. In your code, it is likely used for string conversions (std::stoi, std::stod) and generating random numbers (std::rand).
+
+<unordered_map>: Used for storing key-value pairs in an unordered map data structure. In your code, it is used to store movie information, where the movie title is the key and the corresponding movie details are the value (std::unordered_map<std::string, Movie>).
+
+<vector>: Used for dynamic arrays. In your code, it is used to store lists of movie titles and user information (std::vector<std::string>, std::vector<User>).
+
+<algorithm>: Used for various algorithms. In your code, it is used for sorting movie titles (std::sort) and finding the maximum value for formatting output (std::max).
+
+<windows.h> and <conio.h>: These are Windows-specific libraries used for console-related functions. In your code, they may be used for functions like clearing the console screen (clearScreen()) and reading user input without waiting for the Enter key (_getch()).
+
+<unordered_set>: Used for storing unique elements in no particular order. In your code, it may be used to store unique phone numbers or email addresses (std::unordered_set<std::string>).
+
+<iomanip>: Used for input/output manipulation. In your code, it may be used for formatting output, such as aligning text (std::setw, std::left).
+
+<regex>: Used for regular expressions. In your code, it may be used for validating email addresses or performing pattern matching operations on strings (std::regex_match).
+
+<string>: Used for string operations and manipulations. In your code, it is used for storing and manipulating strings (std::string).
+
 ### Usage
 
 To use the Movie Booking System:
