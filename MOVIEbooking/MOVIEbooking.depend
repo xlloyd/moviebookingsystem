@@ -1,0 +1,56 @@
+# depslib dependency file v1.0
+1689094560 source:c:\users\jeroein magno\documents\c++\moviebooking\main.cpp
+	<iostream>
+	<sstream>
+	"admin.h"
+	"user.h"
+	"fileio.h"
+	"utils.h"
+
+1689094327 c:\users\jeroein magno\documents\c++\moviebooking\admin.h
+	<string>
+
+1689095124 c:\users\jeroein magno\documents\c++\moviebooking\user.h
+	<string>
+
+1689094327 c:\users\jeroein magno\documents\c++\moviebooking\fileio.h
+
+1689094327 c:\users\jeroein magno\documents\c++\moviebooking\utils.h
+	<string>
+	<unordered_map>
+	<vector>
+
+1689094666 source:c:\users\jeroein magno\documents\c++\moviebooking\fileio.cpp
+	"fileio.h"
+	"utils.h"
+	<iostream>
+	<fstream>
+	<limits>
+
+1689094720 source:c:\users\jeroein magno\documents\c++\moviebooking\user.cpp
+	"user.h"
+	"utils.h"
+	"fileio.h"
+	<iostream>
+	<algorithm>
+	<sstream>
+
+1689095557 source:c:\users\jeroein magno\documents\c++\moviebooking\admin.cpp
+	"admin.h"
+	"utils.h"
+	"fileio.h"
+	<iostream>
+	<conio.h>
+	<sstream>
+	<iomanip>
+	<regex>
+	<fstream>
+
+1689095444 source:c:\users\jeroein magno\documents\c++\moviebooking\utils.cpp
+	"utils.h"
+	<iostream>
+	<cstdlib>
+	<windows.h>
+	<conio.h>
+	<regex>
+
