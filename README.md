@@ -41,7 +41,7 @@ The program is structured into the following files:
 
 - `utils.h` and `utils.cpp`: These files contain utility functions used throughout the program, such as input validation, error handling, and formatting output.
 
-- `user.h` and `user.cpp`: These files contain the class definition and implementation for the User class. The User class provides functionalities for the user console, such as viewing available movies and booking movie tickets.
+- `user.h` and `user.cpp`: These files contain the class definition and implementation for the User class. The User class provides functionalities for the user console, such as viewing available movies and booking movie.
 
 partitioning code into separate files brings organization, modularity, collaboration, compilation efficiency, and code maintainability benefits. It is a recommended practice that helps in managing and scaling software projects effectively.
 
