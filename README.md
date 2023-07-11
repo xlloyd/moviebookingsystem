@@ -1,35 +1,46 @@
+<div align="center">
+  <h1>Movie Booking System</h1>
+  <p>A Command-Line Application for Booking Movie Tickets</p>
+</div>
 
-
-## Movie Booking System
+## Introduction
 
 The Movie Booking System is a command-line application implemented in C++. It allows users to book movie tickets, view movie information, and manage user data. The program provides separate consoles for administrators and users, each with different functionalities.
 
-This code uses the following data structures:
+## Data Structures
 
-1. `std::unordered_map<std::string, Movie> movies`: This unordered map stores movies as key-value pairs, where the movie title is the key and the associated movie information is the value. It allows fast access to movie information based on the title.
+The code utilizes the following data structures:
 
-2. `std::vector<User> users`: This vector stores user information. Each element in the vector represents a user and contains various attributes such as name, phone number, email address, movie title, available time, and cinema. The vector allows storing and accessing multiple user records.
+- `std::unordered_map<std::string, Movie>`: This unordered map stores movies as key-value pairs, where the movie title is the key and the associated movie information is the value. It allows fast access to movie information based on the title.
+
+- `std::vector<User>`: This vector stores user information. Each element in the vector represents a user and contains attributes such as name, phone number, email address, movie title, available time, and cinema. The vector allows storing and accessing multiple user records.
 
 Both data structures are used to store and manage movie and user data, respectively, throughout the program. The unordered map provides efficient lookup based on movie titles, while the vector allows storing and iterating over multiple user records.
 
-### Features
+## Features
 
-- **Admin Console**: The Admin Console provides functionalities for administrators to perform various tasks:
-  - Add new movies: Administrators can add new movies to the system by providing details such as movie title, price, duration, and available showtimes.
-  - Delete movies: Administrators can delete movies from the system if they are no longer available.
-  - Modify movie details: Administrators can modify the details of existing movies, such as title, price, duration, and available showtimes.
-  - View movie information: Administrators can view detailed information about each movie, including its title, price, duration, available showtimes, and the number of booked seats.
-  - View user information: Administrators can view information about the users who have booked movie tickets, including their names, phone numbers, email addresses, booked seats, and available showtimes.
-  - Modify user details: Administrators can modify the details of users, such as their names, phone numbers, email addresses, booked seats, and available showtimes.
-  - Delete user information: Administrators can delete user records from the system if necessary.
+### Admin Console
 
-- **User Console**: The User Console allows users to book movie tickets:
-  - View available movies: Users can view a list of available movies, including their titles, prices, durations, and available showtimes.
-  - Book movie tickets: Users can select a movie from the available list and proceed to book tickets by providing their personal information, including their full name, phone number, email address, and selected seats.
-  - Seat availability check: The system checks the availability of the selected seats and ensures they are not already booked.
-  - Confirmation and saving: Once the user confirms the booking, the system saves the booking information and updates the availability of the selected seats.
+The Admin Console provides functionalities for administrators to perform various tasks:
 
-### Key Components
+- Add new movies: Administrators can add new movies to the system by providing details such as movie title, price, duration, and available showtimes.
+- Delete movies: Administrators can delete movies from the system if they are no longer available.
+- Modify movie details: Administrators can modify the details of existing movies, such as title, price, duration, and available showtimes.
+- View movie information: Administrators can view detailed information about each movie, including its title, price, duration, available showtimes, and the number of booked seats.
+- View user information: Administrators can view information about the users who have booked movie tickets, including their names, phone numbers, email addresses, booked seats, and available showtimes.
+- Modify user details: Administrators can modify the details of users, such as their names, phone numbers, email addresses, booked seats, and available showtimes.
+- Delete user information: Administrators can delete user records from the system if necessary.
+
+### User Console
+
+The User Console allows users to book movie tickets:
+
+- View available movies: Users can view a list of available movies, including their titles, prices, durations, and available showtimes.
+- Book movie tickets: Users can select a movie from the available list and proceed to book tickets by providing their personal information, including their full name, phone number, email address, and selected seats.
+- Seat availability check: The system checks the availability of the selected seats and ensures they are not already booked.
+- Confirmation and saving: Once the user confirms the booking, the system saves the booking information and updates the availability of the selected seats.
+
+## Key Components
 
 The Movie Booking System code utilizes several important components:
 
@@ -45,47 +56,25 @@ The Movie Booking System code utilizes several important components:
 
 - **Utility Functions**: The code includes several utility functions to perform common tasks. These functions include clearing the console screen, parsing seat information, and validating input formats. These utility functions help streamline the code and enhance its readability.
 
-Certainly! Here's an updated version of the library descriptions that you can include in the README of your GitHub repository:
-
----
-
-Apologies for the oversight. You are correct that the `cstdlib` library does not include the `rand` function. 
-
-Here's an updated version of the library descriptions without the mention of `std::rand`:
-
----
-
-## Library Descriptions
+## Libraries Used
 
 The following libraries are used in the code:
 
-- **iostream**: Provides input/output stream operations for reading input from the user (`std::cin`) and displaying output to the console (`std::cout`).
-
-- **fstream**: Enables file stream operations, allowing reading from and writing to files (`std::ifstream`, `std::ofstream`).
-
-- **sstream**: Provides string stream operations for reading from and writing to strings (`std::stringstream`).
-
-- **unordered_map**: Used for storing key-value pairs in an unordered map data structure. In this code, it is used to store movie information, with the movie title as the key and the corresponding movie details as the value (`std::unordered_map<std::string, Movie>`).
-
-- **vector**: Supports dynamic arrays and is used to store lists of movie titles and user information (`std::vector<std::string>`, `std::vector<User>`).
-
-- **algorithm**: Provides various algorithms such as sorting (`std::sort`) and finding the maximum value (`std::max`). It is used in this code to sort movie titles and format output.
-
-- **windows.h** and **conio.h**: These Windows-specific libraries are used for console-related functions. In this code, they may be used for clearing the console screen (`clearScreen()`) and reading user input without waiting for the Enter key (`_getch()`).
-
-- **unordered_set**: Used for storing unique elements in no particular order. In this code, it may be used to store unique phone numbers or email addresses (`std::unordered_set<std::string>`).
-
-- **iomanip**: Provides input/output manipulation for formatting output, such as aligning text (`std::setw`, `std::left`).
-
-- **regex**: Supports regular expressions for pattern matching and validation. In this code, it may be used for validating email addresses or performing pattern matching operations on strings (`std::regex_match`).
-
-- **string**: Used for string operations and manipulations (`std::string`).
+- `iostream`: Provides input/output stream operations for reading input from the user (`std::cin`) and displaying output to the console (`std::cout`).
+- `fstream`: Enables file stream operations, allowing reading from and writing to files (`std::ifstream`, `std::ofstream`).
+- `sstream`: Provides string stream operations for reading from and writing to strings (`std::stringstream`).
+- `unordered_map`: Used for storing key-value pairs in an unordered map data structure. In this code, it is used to store movie information, with the movie title as the key and the corresponding movie details as the value (`std::unordered_map<std::string, Movie>`).
+- `vector`: Supports dynamic arrays and is used to store lists of movie titles and user information (`std::vector<std::string>`, `std::vector<User>`).
+- `algorithm`: Provides various algorithms such as sorting (`std::sort`) and finding the maximum value (`std::max`). It is used in this code to sort movie titles and format output.
+- `windows.h` and `conio.h`: These Windows-specific libraries are used for console-related functions. In this code, they may be used for clearing the console screen (`clearScreen()`) and reading user input without waiting for the Enter key (`_getch()`).
+- `unordered_set`: Used for storing unique elements in no particular order. In this code, it may be used to store unique phone numbers or email addresses (`std::unordered_set<std::string>`).
+- `iomanip`: Provides input/output manipulation for formatting output, such as aligning text (`std::setw`, `std::left`).
+- `regex`: Supports regular expressions for pattern matching and validation. In this code, it may be used for validating email addresses or performing pattern matching operations on strings (`std::regex_match`).
+- `string`: Used for string operations and manipulations (`std::string`).
 
 These libraries provide essential functionalities for various aspects of the code, including input/output handling, file operations, data storage, manipulation of strings, and more.
 
----
-
-### Usage
+## Usage
 
 To use the Movie Booking System:
 
@@ -94,22 +83,21 @@ To use the Movie Booking System:
 3. Run the compiled executable.
 4. Follow the on-screen prompts to access the admin or user console and interact with the program.
 
-### Dependencies
+## Dependencies
 
 The Movie Booking System has the following dependencies:
 
-- C++ Compiler (e.g., g++)
+- C++ Compiler (e.g.,g++)
 - Standard Template Library (STL)
 
-### Contributing
+## Contributing
 
 Contributions to the project are welcome. If you find any bugs or have suggestions for improvements, please open an issue or submit a pull request.
 
-### License
+## License
 
 This project is licensed under the [MIT License](LICENSE).
 
-### Acknowledgments
+## Acknowledgments
 
 This project was inspired by the need for a simple movie booking system. It aims to provide a foundational structure for similar applications, making it easier for developers to build upon and customize the system according to their specific requirements.
-
