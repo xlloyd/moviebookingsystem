@@ -646,10 +646,21 @@ void deleteMovie() {
             std::getline(std::cin, confirm);
 
             if (confirm == "yes") {
-                for (auto& user : users) {
+                std::vector<std::string> usersToDelete;
+                for (const auto& user : users) {
                     if (user.movieTitle == movieTitle) {
-                        user.movieTitle.clear();
-                        user.availableTime.clear();
+                        usersToDelete.push_back(user.name);
+                    }
+                }
+
+                for (const auto& username : usersToDelete) {
+                    auto userIter = users.begin();
+                    while (userIter != users.end()) {
+                        if (userIter->name == username) {
+                            userIter = users.erase(userIter);
+                        } else {
+                            ++userIter;
+                        }
                     }
                 }
 
@@ -657,7 +668,7 @@ void deleteMovie() {
                 saveDataToFile();
                 loadDataFromFile();
 
-                std::cout << "Movie deleted successfully!\n";
+                std::cout << "Movie and associated user bookings deleted successfully!\n";
                 break;
             } else if (confirm == "no") {
                 std::cout << "Movie deletion canceled.\n";
@@ -676,6 +687,7 @@ void deleteMovie() {
             if (deleteMore == "yes") {
                 break;
             } else if (deleteMore == "no") {
+                std::cout << "Exiting delete movie mode.\n";
                 return;
             } else {
                 std::cout << "Invalid choice! Please enter 'yes' or 'no'.\n";
