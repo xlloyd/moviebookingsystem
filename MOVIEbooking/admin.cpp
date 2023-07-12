@@ -686,6 +686,7 @@ void deleteMovie() {
 }
 
 
+
 void modifyMovieInfo() {
     loadDataFromFile();
     clearScreen();
