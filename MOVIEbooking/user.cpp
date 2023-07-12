@@ -156,7 +156,8 @@ void bookMovie() {
 
     clearScreen();
 
-    while (true) {
+    
+while (true) {
     std::cout << "Available times:\n";
     std::cout << "'abort' to cancel.\n";
 
@@ -173,14 +174,26 @@ void bookMovie() {
         return;
     }
 
-    int selectedIndex = std::stoi(input) - 1;
+    bool isNumeric = true;
+    for (char c : input) {
+        if (!std::isdigit(c)) {
+            isNumeric = false;
+            break;
+        }
+    }
 
-    if (selectedIndex >= 0 && static_cast<size_t>(selectedIndex) < movie->availableTimes.size()) {
-        std::string selectedTime = movie->availableTimes[selectedIndex];
-        user.availableTime = selectedTime;
-        break;
+    if (isNumeric) {
+        unsigned int selectedIndex = std::stoi(input) - 1;
+
+        if (selectedIndex >= 0 && selectedIndex < movie->availableTimes.size()) {
+            std::string selectedTime = movie->availableTimes[selectedIndex];
+            user.availableTime = selectedTime;
+            break;
+        } else {
+            std::cout << "Invalid index! Please enter a valid index.\n";
+        }
     } else {
-        std::cout << "Invalid index! Please enter a valid index.\n";
+        std::cout << "Invalid input! Please enter a valid index.\n";
     }
 }
 
@@ -192,6 +205,7 @@ loadDataFromFile();
 std::cout << "\nMovie booked successfully!\n";
 
 clearScreen();
+
 
 }
 
