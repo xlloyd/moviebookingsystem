@@ -219,7 +219,7 @@ void uploadMovie() {
     }
 
     while (true) {
-        std::cout << "Available time (hh:mmAM/PM: ";
+        std::cout << "Available time (hh:mmAM/PM): ";
         std::getline(std::cin, input);
 
         if (input == "abort") {
@@ -347,6 +347,7 @@ void viewUsers() {
 }
 
 void modifyUser() {
+
     loadDataFromFile();
 
     clearScreen();
@@ -481,27 +482,34 @@ void modifyUser() {
     break;
 }
 
-        case 5: {
-            std::cout << "enter 'abort' to cancel, enter 'skip' to remain the information.\n";
-            std::string newTime;
-            std::cout << "Available time (" << user.availableTime <<"): ";
-            std::getline(std::cin, newTime);
-            if (newTime == "abort") {
-                std::cout << "Modification process aborted.\n";
-                return;
-            } else if (newTime != "skip") {
-                if (!isValidTimeFormat(newTime)) {
-                    std::cout << "Invalid time format! Please use the format 'hh:mmAM' or 'hh:mmPM'.\n";
-                    return;
-                }
-                user.availableTime = newTime;
-            }
-            break;
-        }
-        default:
-            std::cout << "Invalid action number!\n";
+
+       case 5: {
+    std::cout << "Enter 'abort' to cancel or enter 'skip' to keep the information.\n";
+    std::string newTime;
+    std::cout << "Available time (" << user.availableTime << "): ";
+    std::getline(std::cin, newTime);
+    if (newTime == "abort") {
+        std::cout << "Modification process aborted.\n";
+        return;
+    } else if (newTime != "skip") {
+        if (!isValidTimeFormat(newTime)) {
+            std::cout << "Invalid time format! Please use the format 'hh:mmAM' or 'hh:mmPM'.\n";
             return;
+        }
+        const std::string& movieTitle = user.movieTitle;
+        if (!isTimeAvailable(movies[movieTitle].availableTimes, newTime)) {
+            std::cout << "The selected time is not available for the movie.\n";
+            return;
+        }
+        user.availableTime = newTime;
     }
+    break;
+}
+default:
+    std::cout << "Invalid action number!\n";
+    return;
+}
+
 
     saveDataToFile();
 
@@ -803,21 +811,26 @@ void modifyMovieInfo() {
     if (std::isdigit(input[0])) {
         int index = std::stoi(input) - 1;
         if (index >= 0 && static_cast<size_t>(index) < movie.availableTimes.size()) {
+//
+
     std::string selectedTime = movie.availableTimes[index];
     std::cout << "Selected time: " << selectedTime << std::endl;
 
-            while (true) {
-                std::cout << "Enter the modified time: ";
-                std::getline(std::cin, input);
+    while (true) {
+        std::cout << "Enter the modified time: ";
+        std::getline(std::cin, input);
 
-                if (isValidTimeFormat(input)) {
+    if (isValidTimeFormat(input)) {
+        movie.availableTimes[index] = input; // Update the vector with the modified time
+        std::cout << "Time modified successfully!\n";
+        break;
+    } else {
+        std::cout << "Invalid time format! Use 'hh:mmAM' or 'hh:mmPM'.\n";
+    }
+}
 
-                    std::cout << "Time modified successfully!\n";
-                    break;
-                } else {
-                    std::cout << "Invalid time format! Use 'hh:mmAM' or 'hh:mmPM'.\n";
-                }
-            }
+// ...
+
 
             while (true) {
                 std::cout << "Modify another available time? (yes/no): ";
@@ -828,7 +841,8 @@ void modifyMovieInfo() {
                 } else if (input == "no") {
                     std::cout << "Movie modification completed.\n";
                     saveDataToFile();
-                    loadDataFromFile();
+
+                    saveDataToFile();
                     return;
                 } else {
                     std::cout << "Invalid input! Enter 'yes' or 'no'.\n";
@@ -903,5 +917,4 @@ void viewMovieInfo() {
         viewMovieInfo(); // Call the function recursively to remain in movie information
     }
 }
-
 
