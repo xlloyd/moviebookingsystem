@@ -1,19 +1,20 @@
 #include "user.h"
-#include "utils.h"
-#include "fileio.h"
-#include <iostream>
-#include <algorithm>
-#include <sstream>
 
+const std::string RESET_COLOR = "\033[0m";    // Reset color code for console
+const std::string RED_COLOR = "\033[31m";     // Red color code for console
+const std::string GREEN_COLOR = "\033[32m";   // Green color code for console
+const std::string YELLOW_COLOR = "\033[33m";  // Yellow color code for console
+const std::string BLUE_COLOR = "\033[34m";    // Blue color code for console
 
 void showUserConsole() {
-    std::cout << "User Console\n";
-    std::cout << "------------\n\n";
+    std::cout << GREEN_COLOR << "User Console" << RESET_COLOR << "\n";      // Display "User Console" in green color
+    std::cout << "------------\n\n";                                         // Display a separator
     clearScreen();
+
     while (true) {
-        std::cout << "HELLO PLEASE CHOOSE\n";
-        std::cout << "1. Book a movie\n";
-        std::cout << "2. Exit\n";
+        std::cout << YELLOW_COLOR << "HELLO PLEASE CHOOSE" << RESET_COLOR << "\n";   // Display "HELLO PLEASE CHOOSE" in yellow color
+        std::cout << "1. " << "Book a movie"<< "\n";                                  // Display option 1: "Book a movie"
+        std::cout << "2. " << "Exit" << "\n";                                         // Display option 2: "Exit"
         std::cout << "Enter your choice (1-2): ";
 
         std::string choiceStr;
@@ -24,14 +25,14 @@ void showUserConsole() {
 
         switch (choice) {
             case 1:
-                std::cout << "Book a movie\n";
+                std::cout << "Book a movie\n";                // Perform actions for option 1: "Book a movie"
                 bookMovie();
                 break;
             case 2:
-                std::cout << "Exiting User Console...\n";
+                std::cout << "Exiting User Console...\n";      // Perform actions for option 2: "Exit"
                 return;
             default:
-                std::cout << "Invalid choice!\n";
+                std::cout << RED_COLOR << "Invalid choice!" << RESET_COLOR << "\n";    // Display error message for invalid choices
         }
 
         std::cout << "Press Enter to continue...";
@@ -41,12 +42,53 @@ void showUserConsole() {
     }
 }
 
+void displaySeats(const std::vector<User>& users) {
+    const int numRows = 6;   // Number of rows (A to F)
+    const int numCols = 20;  // Number of columns (1 to 20)
+
+    // Create a matrix to represent the seats
+    std::vector<std::vector<std::string>> seatMatrix(numRows, std::vector<std::string>(numCols, " "));
+
+    // Update the matrix with booked seats
+    for (const User& user : users) {
+        if (user.seat.empty()) continue;   // Skip if the user doesn't have a booked seat
+        char row = user.seat[0];
+        int col = std::stoi(user.seat.substr(1)) - 1;
+
+        int rowIndex = row - 'A';
+        seatMatrix[rowIndex][col] = "X";
+    }
+
+    // Display the screen and seat matrix
+    std::cout << std::string(110, '=') << "\n";
+    std::cout << "                                           " << YELLOW_COLOR << "Screen" << RESET_COLOR << "\n";
+    std::cout << std::string(110, '=') << "\n";
+    std::cout << "                                           \n";
+    std::cout << "                                           \n";
+    std::cout << "                                           \n";
+
+    std::cout << "     ";
+    for (int col = 1; col <= numCols; ++col) {
+        std::cout << "[" << std::setw(3) << col << "]";
+    }
+    std::cout << "\n";
+
+    for (int row = 0; row < numRows; ++row) {
+        char rowLabel = 'A' + row;
+        std::cout << "[" << rowLabel << "]: ";
+        for (int col = 0; col < numCols; ++col) {
+            std::cout << "[" << (seatMatrix[row][col] == "X" ? RED_COLOR : GREEN_COLOR) << std::setw(3) << seatMatrix[row][col] << RESET_COLOR << "]";
+        }
+        std::cout << "\n";
+    }
+}
+
 void bookMovie() {
     loadDataFromFile();
     clearScreen();
 
     std::cout << "Available Movies:\n";
-    std::cout<< "'abort' to cancel\n";
+    std::cout << "'abort' to cancel\n";
     std::cout << "-----------------\n\n";
     std::vector<std::string> movieTitles;
     for (const auto& movie : movies) {
@@ -89,11 +131,11 @@ void bookMovie() {
     }
 
     if (movie == nullptr) {
-        std::cout << "Movie title not found!\n";
+        std::cout << RED_COLOR << "Movie title not found!" << RESET_COLOR << "\n";
         return;
-
     }
-      clearScreen();
+
+    clearScreen();
 
     std::cout << "\n[Booking Process]\n";
     std::cout << "Enter 'abort' at any time to cancel.\n\n";
@@ -110,9 +152,9 @@ void bookMovie() {
         }
 
         if (!isValidFullName(user.name)) {
-            std::cout << "Invalid full name! Please enter a valid full name.\n";
+            std::cout << RED_COLOR << "Invalid full name! Please enter a valid full name." << RESET_COLOR << "\n";
         } else if (isDuplicateFullName(user.name)) {
-            std::cout << "Name already exists! Please enter a different name.\n";
+            std::cout << RED_COLOR << "Name already exists! Please enter a different name." << RESET_COLOR << "\n";
         } else {
             break;
         }
@@ -128,9 +170,9 @@ void bookMovie() {
         }
 
         if (!isValidPhoneNumber(user.phoneNumber)) {
-            std::cout << "Invalid phone number! Please enter a valid 11-digit phone number.\n";
+            std::cout << RED_COLOR << "Invalid phone number! Please enter a valid 11-digit phone number." << RESET_COLOR << "\n";
         } else if (isDuplicatePhoneNumber(user.phoneNumber)) {
-            std::cout << "Phone number already exists! Please enter a different phone number.\n";
+            std::cout << RED_COLOR << "Phone number already exists! Please enter a different phone number." << RESET_COLOR << "\n";
         } else {
             break;
         }
@@ -146,9 +188,9 @@ void bookMovie() {
         }
 
         if (!isValidEmailAddress(user.emailAddress)) {
-            std::cout << "Invalid email address! Please enter a valid email address.\n";
+            std::cout << RED_COLOR << "Invalid email address! Please enter a valid email address." << RESET_COLOR << "\n";
         } else if (isDuplicateEmailAddress(user.emailAddress)) {
-            std::cout << "Email address already exists! Please enter a different email address.\n";
+            std::cout << RED_COLOR << "Email address already exists! Please enter a different email address." << RESET_COLOR << "\n";
         } else {
             break;
         }
@@ -156,56 +198,84 @@ void bookMovie() {
 
     clearScreen();
 
-    
-while (true) {
-    std::cout << "Available times:\n";
-    std::cout << "'abort' to cancel.\n";
+    while (true) {
+        std::cout << "Available times:\n";
+        std::cout << "'abort' to cancel.\n";
 
-    for (size_t i = 0; i < movie->availableTimes.size(); ++i) {
-        std::cout << i + 1 << ". " << movie->availableTimes[i] << std::endl;
-    }
-
-    std::cout << "Select the index of the available time: ";
-    std::string input;
-    std::getline(std::cin, input);
-
-    if (input == "abort") {
-        std::cout << "Booking process canceled.\n";
-        return;
-    }
-
-    bool isNumeric = true;
-    for (char c : input) {
-        if (!std::isdigit(c)) {
-            isNumeric = false;
-            break;
+        for (size_t i = 0; i < movie->availableTimes.size(); ++i) {
+            std::cout << i + 1 << ". " << movie->availableTimes[i] << std::endl;
         }
-    }
 
-    if (isNumeric) {
-        unsigned int selectedIndex = std::stoi(input) - 1;
+        std::cout << "Select the index of the available time: ";
+        std::string input;
+        std::getline(std::cin, input);
 
-        if (selectedIndex >= 0 && selectedIndex < movie->availableTimes.size()) {
-            std::string selectedTime = movie->availableTimes[selectedIndex];
-            user.availableTime = selectedTime;
-            break;
+        if (input == "abort") {
+            std::cout << "Booking process canceled.\n";
+            return;
+        }
+
+        bool isNumeric = true;
+        for (char c : input) {
+            if (!std::isdigit(c)) {
+                isNumeric = false;
+                break;
+            }
+        }
+
+        if (isNumeric) {
+            unsigned int selectedIndex = std::stoi(input) - 1;
+
+            if (selectedIndex >= 0 && selectedIndex < movie->availableTimes.size()) {
+                std::string selectedTime = movie->availableTimes[selectedIndex];
+                user.availableTime = selectedTime;
+                break;
+            } else {
+                std::cout << RED_COLOR << "Invalid index! Please enter a valid index." << RESET_COLOR << "\n";
+                continue;
+            }
         } else {
-            std::cout << "Invalid index! Please enter a valid index.\n";
+            std::cout << RED_COLOR << "Invalid input! Please enter a valid index." << RESET_COLOR << "\n";
+            continue;
         }
-    } else {
-        std::cout << "Invalid input! Please enter a valid index.\n";
+    }
+
+    clearScreen();
+
+    while (true) {
+        displaySeats(users);    // Display the seat matrix
+
+        std::cout << "Enter the seat number (A-F, 1-20): ";
+        std::string seat;
+        std::getline(std::cin, seat);
+
+        if (seat == "abort") {
+            std::cout << "Booking process canceled.\n";
+            return;
+        }
+
+        if (!isValidSeat(seat)) {
+            std::cout << RED_COLOR << "Invalid seat number! Please enter a valid seat number (e.g., A1)." << RESET_COLOR << "\n";
+            continue;
+        }
+
+        if (isSeatBooked(seat, users)) {
+            std::cout << RED_COLOR << "Seat already booked! Please select a different seat." << RESET_COLOR << "\n";
+            continue;
+        }
+
+        // Book the seat
+        user.seat = seat;
+        user.movieTitle = movie->title;    // Assign the movie title to the user
+        users.push_back(user);
+
+        std::cout << GREEN_COLOR << "Seat " << seat << " booked successfully." << RESET_COLOR << "\n";
+
+        saveDataToFile();
+
+        loadDataFromFile();
+
+        return;
+        clearScreen();
     }
 }
-
-user.movieTitle = movie->title;
-users.push_back(user);
-saveDataToFile();
-loadDataFromFile();
-
-std::cout << "\nMovie booked successfully!\n";
-
-clearScreen();
-
-
-}
-
