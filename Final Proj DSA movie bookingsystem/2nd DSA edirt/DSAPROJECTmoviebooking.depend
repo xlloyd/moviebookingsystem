@@ -1,0 +1,173 @@
+# depslib dependency file v1.0
+1689196598 source:c:\users\acer\documents\c++\dsaprojectmoviebooking\admin.cpp
+	"admin.h"
+	"utils.h"
+	"fileio.h"
+	<iostream>
+	<conio.h>
+	<sstream>
+	<iomanip>
+	<regex>
+	<fstream>
+
+1689179767 c:\users\acer\documents\c++\dsaprojectmoviebooking\admin.h
+	<string>
+
+1689179759 c:\users\acer\documents\c++\dsaprojectmoviebooking\utils.h
+	<string>
+	<unordered_map>
+	<vector>
+
+1689179767 c:\users\acer\documents\c++\dsaprojectmoviebooking\fileio.h
+
+1689179767 source:c:\users\acer\documents\c++\dsaprojectmoviebooking\fileio.cpp
+	"fileio.h"
+	"utils.h"
+	<iostream>
+	<fstream>
+	<limits>
+
+1689187355 source:c:\users\acer\documents\c++\dsaprojectmoviebooking\user.cpp
+	"user.h"
+	"utils.h"
+	"fileio.h"
+	<iostream>
+	<algorithm>
+	<sstream>
+
+1689179767 c:\users\acer\documents\c++\dsaprojectmoviebooking\user.h
+	<string>
+
+1689179767 source:c:\users\acer\documents\c++\dsaprojectmoviebooking\utils.cpp
+	"utils.h"
+	<iostream>
+	<cstdlib>
+	<windows.h>
+	<conio.h>
+	<regex>
+
+1689184890 source:c:\users\acer\documents\c++\dsaprojectmoviebooking\main.cpp
+	<iostream>
+	<sstream>
+	"admin.h"
+	"user.h"
+	"fileio.h"
+	"utils.h"
+
+1689380717 source:c:\users\acer\documents\c++\dsa try\admin.cpp
+	"admin.h"
+	"utils.h"
+	"fileio.h"
+	<iostream>
+	<conio.h>
+	<sstream>
+	<iomanip>
+	<regex>
+	<fstream>
+	<limits>
+
+1689380717 c:\users\acer\documents\c++\dsa try\admin.h
+	<string>
+
+1689380717 c:\users\acer\documents\c++\dsa try\utils.h
+	<string>
+	<unordered_map>
+	<map>
+	<vector>
+
+1689179767 c:\users\acer\documents\c++\dsa try\fileio.h
+
+1689380717 source:c:\users\acer\documents\c++\dsa try\fileio.cpp
+	"fileio.h"
+	"utils.h"
+	<iostream>
+	<fstream>
+	<limits>
+
+1689380717 source:c:\users\acer\documents\c++\dsa try\main.cpp
+	<iostream>
+	<sstream>
+	"admin.h"
+	"user.h"
+	"fileio.h"
+	"utils.h"
+
+1689380717 c:\users\acer\documents\c++\dsa try\user.h
+	<string>
+
+1689387655 source:c:\users\acer\documents\c++\dsa try\user.cpp
+	"user.h"
+	"utils.h"
+	"fileio.h"
+	<iostream>
+	<algorithm>
+	<sstream>
+
+1689387655 source:c:\users\acer\documents\c++\dsa try\utils.cpp
+	"utils.h"
+	<iostream>
+	<cstdlib>
+	<windows.h>
+	<conio.h>
+	<regex>
+
+1689721307 source:c:\users\acer\documents\c++\2nd dsa edirt\admin.cpp
+	"admin.h"
+	"utils.h"
+	"user.h"
+	"fileio.h"
+	<iostream>
+	<conio.h>
+	<sstream>
+	<iomanip>
+	<regex>
+	<fstream>
+	<limits>
+
+1689680125 c:\users\acer\documents\c++\2nd dsa edirt\admin.h
+	<string>
+
+1689721194 c:\users\acer\documents\c++\2nd dsa edirt\utils.h
+	<string>
+	<unordered_map>
+	<vector>
+
+1689474117 c:\users\acer\documents\c++\2nd dsa edirt\fileio.h
+
+1689721307 source:c:\users\acer\documents\c++\2nd dsa edirt\fileio.cpp
+	"fileio.h"
+	"utils.h"
+	<iostream>
+	<fstream>
+	<limits>
+
+1689721431 source:c:\users\acer\documents\c++\2nd dsa edirt\main.cpp
+	<iostream>
+	<sstream>
+	"admin.h"
+	"user.h"
+	"fileio.h"
+	"utils.h"
+
+1689515791 c:\users\acer\documents\c++\2nd dsa edirt\user.h
+	"admin.h"
+	"utils.h"
+	"fileio.h"
+	<iostream>
+	<algorithm>
+	<sstream>
+	<iomanip>
+	<string>
+	<vector>
+
+1689722139 source:c:\users\acer\documents\c++\2nd dsa edirt\user.cpp
+	"user.h"
+
+1689722969 source:c:\users\acer\documents\c++\2nd dsa edirt\utils.cpp
+	"utils.h"
+	<iostream>
+	<cstdlib>
+	<windows.h>
+	<conio.h>
+	<regex>
+
