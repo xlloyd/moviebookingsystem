@@ -1,3 +1,5 @@
+//Open Final proj DSA movie booking system
+
 # Movie Booking System
 
 The Movie Booking System is a command-line application implemented in C++. It allows users to book movies, view movie information, and manage user data. The program provides separate consoles for administrators and users, each with different functionalities.
